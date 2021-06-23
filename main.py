@@ -31,9 +31,13 @@ async def index(pincode,dose,age):
     age = int(age)
     return await scan(pincode,dose,age)
 
-async def scan(pincode=411014,dose=1,age=18):
-    current_date = datetime.datetime.today().date() + datetime.timedelta(days=1)
+async def scan(pincode=411014,dose=1,age=18,looper=False):
+    current_date = datetime.datetime.today().date()
     current_date = current_date.strftime("%d") + "-" + current_date.strftime("%m") + "-" + current_date.strftime("%Y")
+    if looper == True:
+        current_date = datetime.datetime.today().date() + datetime.timedelta(days=1)
+        current_date = current_date.strftime("%d") + "-" + current_date.strftime("%m") + "-" + current_date.strftime("%Y")
+    print(current_date)
     async with aiohttp.ClientSession() as session:
         async with session.get(f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode={pincode}&date={current_date}") as resp:
             centers = await resp.text()
@@ -52,7 +56,7 @@ async def scan(pincode=411014,dose=1,age=18):
 @repeat_every(seconds=10)
 async def looper():
     global currentdata ,telegram_token, telegram_chat_id
-    data = await scan()
+    data = await scan(looper=True)
     url = "https://webhook.site/4a707569-4d1d-4e47-acf9-305b53839646"
     url = f"https://api.telegram.org/bot{telegram_token}/sendMessage?chat_id={telegram_chat_id}&text={json.dumps(data)}" # You can have any webhook end-point over here.
     if not data.__contains__("Not"):
