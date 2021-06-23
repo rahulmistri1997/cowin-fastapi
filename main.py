@@ -52,7 +52,7 @@ async def scan(pincode=411014,dose=1,age=18):
 @repeat_every(seconds=10)
 async def looper():
     global currentdata ,telegram_token, telegram_chat_id
-    data = await scan(pincode=413106,dose=2,age=18)
+    data = await scan()
     url = "https://webhook.site/4a707569-4d1d-4e47-acf9-305b53839646"
     url = f"https://api.telegram.org/bot{telegram_token}/sendMessage?chat_id={telegram_chat_id}&text={json.dumps(data)}" # You can have any webhook end-point over here.
     if not data.__contains__("Not"):
