@@ -1,0 +1,1 @@
+{"id":"8fa26c5c-66a1-4b27-a33f-17138513ef8c","space":6344,"runtime":"python3.7","name":"fastapi-cowin","path":"emnppw","project":"c0rg9pf2","account":"144798365827","region":"ap-southeast-1","deps":["fastapi","uvicorn","aiohttp","fastapi_utils","python-dotenv"],"envs":null,"public":true,"log_level":"debug","cron":""}
