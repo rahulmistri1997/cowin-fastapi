@@ -20,6 +20,10 @@ telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
 app = FastAPI()
 currentdata = None
 
+@app.get("/")
+async def indexhtml():
+    return "Please go to /docs Url to learn about the API"
+
 @app.get("/cowin/{pincode}/{dose}/{age}",description="Age should be 18 or 45 ! Dose should be 1 or 2")
 async def index(pincode,dose,age):
     pincode = int(pincode)
@@ -46,7 +50,6 @@ async def scan(pincode=411014,dose=1,age=18):
 @app.on_event("startup")
 @repeat_every(seconds=10)
 async def looper():
-    print("trigger")
     global currentdata ,telegram_token, telegram_chat_id
     data = await scan()
     url = "https://webhook.site/4a707569-4d1d-4e47-acf9-305b53839646"
