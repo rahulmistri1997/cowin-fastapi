@@ -59,7 +59,7 @@ async def looper():
         try:
             if data != currentdata:
                 for each in data:
-                    url = f"https://api.telegram.org/bot{telegram_token}/sendMessage?chat_id={telegram_chat_id}&text={json.dumps(each)}" # You can have any webhook end-point over here.
+                    url = f"https://api.telegram.org/bot1831222795:AAHef_8DMtn2HtiSOA_dHgjuq5dR2qFv9Do/sendMessage?chat_id=-1001545357755&text={json.dumps(each)}"
                     async with aiohttp.ClientSession() as session:
                         async with session.post(url=url,data=json.dumps(data)) as resp:
                             if resp.status == 200:
