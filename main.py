@@ -46,6 +46,7 @@ async def scan(pincode=411014,dose=1,age=18):
 @app.on_event("startup")
 @repeat_every(seconds=10)
 async def looper():
+    print("trigger")
     global currentdata ,telegram_token, telegram_chat_id
     data = await scan()
     url = "https://webhook.site/4a707569-4d1d-4e47-acf9-305b53839646"
