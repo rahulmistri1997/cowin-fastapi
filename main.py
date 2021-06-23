@@ -37,7 +37,6 @@ async def scan(pincode=411014,dose=1,age=18,looper=False):
     if looper == True:
         current_date = datetime.datetime.today().date() + datetime.timedelta(days=1)
         current_date = current_date.strftime("%d") + "-" + current_date.strftime("%m") + "-" + current_date.strftime("%Y")
-    print(current_date)
     async with aiohttp.ClientSession() as session:
         async with session.get(f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode={pincode}&date={current_date}") as resp:
             centers = await resp.text()
